@@ -155,8 +155,8 @@ def test_epoch(encoder, decoder, device, dataloader, loss_fn):
         val_loss = loss_fn(conc_out, conc_label)
     return val_loss.data
 
-def plot_ae_outputs(encoder,decoder,n=10):
-    plt.figure(figsize=(16,4.5))
+def plot_ae_outputs(sTitle, encoder,decoder,n=10):
+    plt.figure(num=sTitle, figsize=(16,4.5))
     targets = test_dataset.targets.numpy()
     t_idx = {i:np.where(targets==i)[0][0] for i in range(n)}
     for i in range(n):
@@ -202,6 +202,8 @@ print(f'Selected device: {device}')
 encoder_4d.to(device)
 decoder_4d.to(device)
 
+sTitle = "4 Dimensions"
+print(sTitle)
 num_epochs = 30
 loss_map_4d = {'train_loss':[],'val_loss':[]}
 for epoch in range(num_epochs):
@@ -211,7 +213,7 @@ for epoch in range(num_epochs):
    print('\n EPOCH {}/{} \t train loss {} \t val loss {}'.format(epoch + 1, num_epochs,train_loss,val_loss))
    loss_map_4d['train_loss'].append(train_loss)
    loss_map_4d['val_loss'].append(val_loss)
-   plot_ae_outputs(encoder_4d,decoder_4d,n=10)
+   #plot_ae_outputs(sTitle, encoder_4d,decoder_4d,n=10)
 
 loss_fn = torch.nn.MSELoss()
 lr= 0.001
@@ -237,6 +239,8 @@ print(f'Selected device: {device}')
 encoder_5d.to(device)
 decoder_5d.to(device)
 
+sTitle = "5 Dimensions"
+print(sTitle)
 num_epochs = 30
 loss_map_5d = {'train_loss':[],'val_loss':[]}
 for epoch in range(num_epochs):
@@ -246,7 +250,7 @@ for epoch in range(num_epochs):
    print('\n EPOCH {}/{} \t train loss {} \t val loss {}'.format(epoch + 1, num_epochs,train_loss,val_loss))
    loss_map_5d['train_loss'].append(train_loss)
    loss_map_5d['val_loss'].append(val_loss)
-   plot_ae_outputs(encoder_5d,decoder_5d,n=10)
+   #plot_ae_outputs(sTitle, encoder_5d,decoder_5d,n=10)
 
 loss_fn = torch.nn.MSELoss()
 lr= 0.001
@@ -272,6 +276,8 @@ print(f'Selected device: {device}')
 encoder_6d.to(device)
 decoder_6d.to(device)
 
+sTitle = "6 Dimensions"
+print(sTitle)
 num_epochs = 30
 loss_map_6d = {'train_loss':[],'val_loss':[]}
 for epoch in range(num_epochs):
@@ -281,7 +287,7 @@ for epoch in range(num_epochs):
    print('\n EPOCH {}/{} \t train loss {} \t val loss {}'.format(epoch + 1, num_epochs,train_loss,val_loss))
    loss_map_6d['train_loss'].append(train_loss)
    loss_map_6d['val_loss'].append(val_loss)
-   plot_ae_outputs(encoder_6d,decoder_6d,n=10)
+   #plot_ae_outputs(sTitle, encoder_6d,decoder_6d,n=10)
 
 loss_fn = torch.nn.MSELoss()
 lr= 0.001
@@ -307,6 +313,8 @@ print(f'Selected device: {device}')
 encoder_7d.to(device)
 decoder_7d.to(device)
 
+sTitle = "7 Dimensions"
+print(sTitle)
 num_epochs = 30
 loss_map_7d = {'train_loss':[],'val_loss':[]}
 for epoch in range(num_epochs):
@@ -316,7 +324,7 @@ for epoch in range(num_epochs):
    print('\n EPOCH {}/{} \t train loss {} \t val loss {}'.format(epoch + 1, num_epochs,train_loss,val_loss))
    loss_map_7d['train_loss'].append(train_loss)
    loss_map_7d['val_loss'].append(val_loss)
-   plot_ae_outputs(encoder_7d,decoder_7d,n=10)
+   #plot_ae_outputs(sTitle, encoder_7d,decoder_7d,n=10)
 
 loss_fn = torch.nn.MSELoss()
 lr= 0.001
@@ -342,6 +350,8 @@ print(f'Selected device: {device}')
 encoder_8d.to(device)
 decoder_8d.to(device)
 
+sTitle = "8 Dimensions"
+print(sTitle)
 num_epochs = 30
 loss_map_8d = {'train_loss':[],'val_loss':[]}
 for epoch in range(num_epochs):
@@ -351,7 +361,7 @@ for epoch in range(num_epochs):
    print('\n EPOCH {}/{} \t train loss {} \t val loss {}'.format(epoch + 1, num_epochs,train_loss,val_loss))
    loss_map_8d['train_loss'].append(train_loss)
    loss_map_8d['val_loss'].append(val_loss)
-   plot_ae_outputs(encoder_8d,decoder_8d,n=10)
+   #plot_ae_outputs(sTitle, encoder_8d,decoder_8d,n=10)
 
 x = [i for i in range(30)]
 fig, ax = plt.subplots(3,2, figsize=(15,15))
@@ -380,13 +390,8 @@ ax[2,1].plot(x, loss_map_8d['val_loss'], label="Val loss")
 ax[2,1].set_title("8 Dimensional Latent Space, 30 Epochs")
 ax[2,1].legend(loc='upper right')
 
-print("4 Dimensions")
-plot_ae_outputs(encoder_4d,decoder_4d,n=10)
-print("5 Dimensions")
-plot_ae_outputs(encoder_5d,decoder_5d,n=10)
-print("6 Dimensions")
-plot_ae_outputs(encoder_6d,decoder_6d,n=10)
-print("7 Dimensions")
-plot_ae_outputs(encoder_7d,decoder_7d,n=10)
-print("8 Dimensions")
-plot_ae_outputs(encoder_8d,decoder_8d,n=10)
+plot_ae_outputs("4 Dimensions", encoder_4d,decoder_4d,n=10)
+plot_ae_outputs("5 Dimensions", encoder_5d,decoder_5d,n=10)
+plot_ae_outputs("6 Dimensions", encoder_6d,decoder_6d,n=10)
+plot_ae_outputs("7 Dimensions", encoder_7d,decoder_7d,n=10)
+plot_ae_outputs("8 Dimensions", encoder_8d,decoder_8d,n=10)
